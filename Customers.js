@@ -55,14 +55,62 @@ app.post('/customer', (req,res) => {
          if (err)
          throw err;
     })
-})
+});
 
+/****************************************************************** 
+ * Get All Customers function
+ * 
+ *  @API GET:http://localhost:5555/customers
+ * 
+ * *****************************************************************/
+app.get('/customers', ( req, res ) => {
 
+    Customer.find().then( (customers) =>{
+        res.json(customers);
+    }).catch( err =>{
+        if (err)
+        throw err;
+    });
+});
 
+/****************************************************************** 
+ * Get Customer By Id function
+ * 
+ *  @API GET:http://localhost:5555/customer/id
+ * 
+ * *****************************************************************/
+app.get('/customer/:id', ( req, res) => {
+    
+    Customer.findById(req.params.id).then( (customer) => {
 
+        if (customer) {
+            res.json(customer);
+        }else {
+            res.statusCode(404);
+        }
 
+    }).catch( (err) => {
+        if (err)
+        throw err;
+    });
 
+});
 
+/****************************************************************** 
+ * Delete Customer By Id function
+ * 
+ *  @API DELETE:http://localhost:5555/customer/id
+ * 
+ * *****************************************************************/
+app.delete("/customer/:id", ( req,res) => {
+    console.log("in delete customer");
+    Customer.findByIdAndRemove( req.params.id ).then( () =>{
+        res.json( { status: "success" });
+    }).catch( (err) => {
+        if ( err )
+        throw err;
+    });
+});
 
 
 app.listen("5555", () => {
