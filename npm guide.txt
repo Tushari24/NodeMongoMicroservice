@@ -1,0 +1,138 @@
+// nodemon   /*lib use for any save in file will reload webapp for node js app*/ /* npm install nodemon -g;
+
+$ uglifyjs example.js -o example.min.js // for minification of js files
+
+
+/************** Basic Cmds*********************************/
+$ which node		//Let’s see where node was installed and check the version.
+$ node				// opens node in repl mode
+
+	/*********** In Repl Mode ****************/
+	> .help
+		.break    Sometimes you get stuck, this gets you out
+		.clear    Alias for .break
+		.editor   Enter editor mode
+		.exit     Exit the repl
+		.help     Show repl options
+		.load     Load JS from a file into the REPL session
+		.save     Save all evaluated commands in this REPL session to a file
+	> .exit
+	/*********************************************/
+$ which npm	 / npm -v	//Let’s see where node was installed and check the version.
+$ npm config get prefix			// get the current global location.(for global package)
+
+//We use the --global flag, but this can be abbreviated to -g.
+
+$ npm list --global			//  list the global packages we have installed
+
+////The output however, is rather verbose. We can change that with the --depth=0 option. i.e $$$$ npm list -g --depth=0
+
+
+
+
+
+
+///******Installing Packages in Local Mode
+When you install packages locally, you normally do so using a package.json file.
+ Let’s go ahead and create one.*************/////
+
+$ npm init		// creates pakage.json for current project //Tip: If you want a quicker way to generate a package.json file use    $$$$ npm init --y
+
+$ npm install underscore  // install package in current project i.e local (underscore is package name)
+
+	/********Now if we have a look in package.json we will see that a dependencies field has been added***********/
+	
+	/***Note the dependencies list got updated automatically. 
+	In previous versions of npm, you would have had to execute npm install request --save to save the dependency in package.json.
+	If you wanted to install a package without saving it in package.json, just use --no-save argument.  ***/
+	
+	
+	
+/***********Managing Dependencies with package.json***********/
+As you can see, Underscore v1.9.1 was installed in our project. The caret (^) at the front of the version number indicates that when installing, 
+npm will pull in the highest version of the package it can find where the only the major version has to match (unless a package-lock.json file is present).
+
+/***Also notice that Underscore was saved as a property of the dependencies field. ***/
+/***It would also be possible to save a package as a devDependency by specifying a --save-dev flag***/
+
+$ npm uninstall underscore			//Uninstalling Local Packages
+
+$npm list 							//shows local installed packages
+
+/****Installing a Specific Version of a Package********/
+
+$ npm install underscore@1.9.0    //@ sign to append a version number
+
+
+/*****Updating a Package************/
+
+$ npm outdated  //check if there’s an update for the Underscore package
+
+		/***The Current column shows us the version that is installed locally. 
+		The Latest column tells us the latest version of the package.
+		And the Wanted column tells us the
+		latest version of the package we can upgrade to without breaking our existing code.******/
+
+
+		/***You can go ahead and try this out if you like. Delete the node_modules folder,
+		then re-run $ npm i. The latest version of npm will install Underscore v11.9.0
+		(as this is what is specified in the package-lock.json file).
+		Earlier versions will pull in v1.9.1 due to the rules of semantic versioning.*********/
+
+
+/***Now, let’s assume the latest version of Underscore fixed the bug we had earlier and we want to update our package to that version.**/
+
+$ npm update underscore
+
+
+		/***Tip: For this to work, Underscore has to be listed as a dependency in package.json.
+		We can also execute npm update if we have many outdated modules we want to update.****/
+
+
+/**Let’s assume you have cloned your project source code to a another machine 
+and we want to install the dependencies. Let’s delete the node_modules folder first then execute npm install**/
+
+$ npm install  //to install dependencies of package.json file
+
+//install multiple packages 
+$ npm i express momemt lodash mongoose body-parser webpack
+
+/*****************Managing the Cache***************************/
+
+	/**When npm installs a package it keeps a copy,
+	so the next time you want to install that package, 
+	it doesn’t need to hit the network. The copies are cached in the .
+	npm directory in your home path.	***/
+	
+$ ls ~/.npm    // Default: ~/.npm on Posix, or %AppData%/npm-cache on Windows. The root cache folder.
+
+	/**This directory will get cluttered with old packages over time, 
+		so it’s useful to clean it up occasionally.**/
+	
+$ npm cache clean --force
+
+
+/*********************Aliases************************/
+
+npm i <package> – install local package
+npm i -g </package><package> – install global package
+npm un </package><package> – uninstall local package
+npm up – npm update packages
+npm t – run tests
+npm ls – list installed modules
+npm ll or npm la – print additional package information while listing modules
+
+
+/*********************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
